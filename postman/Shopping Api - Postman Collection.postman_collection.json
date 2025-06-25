@@ -1,0 +1,220 @@
+{
+	"info": {
+		"_postman_id": "91a6b85a-6364-4102-832a-fab2f2fdd70a",
+		"name": "Shopping Api - Postman Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Products - Create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Mango\",\n    \"priceInCents\": 10\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Products - GetAll",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Recipes - Create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Caglar's Secret Formula\",\n    \"products\": [\n        \"19e0831c-87ae-4628-9a40-fe929316a6ef\",\n        \"5d72a0d1-4b31-4bc4-a341-dddbbd16eb0a\"\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/recipes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"recipes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Recipes - GetAll",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/recipes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"recipes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cart - Create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"products\": [\n        \"335ee904-8142-475c-af2b-00f1b0d4b03b\"\n    ],\n    \"recipes\": [\n        \"d8e20db3-0f1f-44a1-bd5e-75ef029b3318\"\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/carts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"carts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cart - GetById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/carts/c99292f5-d1c6-4ce9-afac-e195d7acd3a5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"carts",
+						"c99292f5-d1c6-4ce9-afac-e195d7acd3a5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cart - Add Recipe",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/carts/c99292f5-d1c6-4ce9-afac-e195d7acd3a5/recipes/d8e20db3-0f1f-44a1-bd5e-75ef029b3318",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"carts",
+						"c99292f5-d1c6-4ce9-afac-e195d7acd3a5",
+						"recipes",
+						"d8e20db3-0f1f-44a1-bd5e-75ef029b3318"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cart - Delete Recipe",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"recipeId\" : \"d8e20db3-0f1f-44a1-bd5e-75ef029b3318\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/carts/c99292f5-d1c6-4ce9-afac-e195d7acd3a5/recipes/d8e20db3-0f1f-44a1-bd5e-75ef029b3318",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"carts",
+						"c99292f5-d1c6-4ce9-afac-e195d7acd3a5",
+						"recipes",
+						"d8e20db3-0f1f-44a1-bd5e-75ef029b3318"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
