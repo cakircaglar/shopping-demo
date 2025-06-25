@@ -12,7 +12,10 @@ import java.util.UUID
 
 @Service
 @Transactional
-class ProductPersistenceAdapter(private val productRepository: ProductRepository, private val entityConverter: EntityConverter) : ProductPersistencePort {
+class ProductPersistenceAdapter(
+  private val productRepository: ProductRepository,
+  private val entityConverter: EntityConverter,
+) : ProductPersistencePort {
   override fun getAll(): List<Product> {
     val productEntities = productRepository.findAll()
     return productEntities.map { entityConverter.toProductModel(it) }
@@ -25,7 +28,7 @@ class ProductPersistenceAdapter(private val productRepository: ProductRepository
 
   override fun getById(id: UUID): Product? {
     val productEntity = productRepository.findById(id)
-    if(productEntity.isEmpty)
+    if (productEntity.isEmpty)
       return null
 
     return entityConverter.toProductModel(productEntity.get())
@@ -37,7 +40,7 @@ class ProductPersistenceAdapter(private val productRepository: ProductRepository
 
   private fun toEntity(createProductCommand: CreateProductCommand): ProductEntity {
     return ProductEntity(
-      name =  createProductCommand.name,
+      name = createProductCommand.name,
       priceInCents = createProductCommand.priceInCents
     )
   }

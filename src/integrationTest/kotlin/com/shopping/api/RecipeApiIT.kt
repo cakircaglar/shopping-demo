@@ -1,6 +1,7 @@
 package com.shopping.api
 
 import assertk.assertThat
+import assertk.assertions.isEmpty
 import assertk.assertions.isEqualTo
 import assertk.assertions.isNotNull
 import com.shopping.AbstractIT
@@ -80,5 +81,25 @@ class RecipeApiIT(
     val recipesInDb = recipeRepository.findAll()
     assertThat(recipesInDb.size).isEqualTo(1)
     assertThat(response).isEqualTo(recipesInDb[0].id)
+  }
+
+  @Test
+  fun `create fails when product in recipe does not exist`() {
+    //given
+    val command = CreateRecipeCommandDto(
+      name = "Banana Bread",
+      products = listOf(UUID.randomUUID()) // Non-existing product ID
+    )
+
+    //when
+    webTestClient.post()
+      .uri("$INTERNAL_BASE_PATH/recipes")
+      .bodyValue(command)
+      .exchange()
+      .expectStatus().isNotFound
+
+    //then
+    val recipesInDb = recipeRepository.findAll()
+    assertThat(recipesInDb).isEmpty() // No recipes should be created
   }
 }
