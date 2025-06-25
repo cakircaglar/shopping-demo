@@ -26,10 +26,20 @@ dependencies {
   implementation 'org.flywaydb:flyway-core'
   implementation 'org.flywaydb:flyway-database-postgresql'
   implementation 'org.jetbrains.kotlin:kotlin-reflect'
-  runtimeOnly 'org.postgresql:postgresql'
+
+  runtimeOnly 'org.postgresql:postgresql:42.7.5'
+
+  testImplementation 'org.postgresql:postgresql:42.7.5'
+  testImplementation 'org.springframework.boot:spring-boot-starter-web'
+  testImplementation 'org.springframework.boot:spring-boot-starter-webflux'
   testImplementation 'org.springframework.boot:spring-boot-starter-test'
   testImplementation 'org.jetbrains.kotlin:kotlin-test-junit5'
-  testImplementation 'org.testcontainers:postgresql'
+  testImplementation 'org.testcontainers:postgresql:1.17.6'
+  testImplementation 'org.testcontainers:junit-jupiter:1.21.0'
+  testImplementation 'com.willowtreeapps.assertk:assertk-jvm:0.28.1'
+  testImplementation 'org.assertj:assertj-core'
+  testImplementation 'org.mockito.kotlin:mockito-kotlin:5.4.0'
+  testImplementation 'com.h2database:h2:2.3.232'
   testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
@@ -43,6 +53,28 @@ allOpen {
   annotation 'jakarta.persistence.Entity'
   annotation 'jakarta.persistence.MappedSuperclass'
   annotation 'jakarta.persistence.Embeddable'
+}
+
+sourceSets {
+  integrationTest {
+    java.srcDir 'src/integrationTest/java'
+    kotlin.srcDir 'src/integrationTest/kotlin'
+    resources.srcDir 'src/integrationTest/resources'
+    compileClasspath += main.output
+    runtimeClasspath += main.output
+  }
+}
+
+configurations {
+  integrationTestImplementation.extendsFrom testImplementation
+  integrationTestRuntime.extendsFrom testRuntime
+}
+
+tasks.register('integrationTest', Test) {
+  testClassesDirs = sourceSets.integrationTest.output.classesDirs
+  group 'verification'
+  classpath = sourceSets.integrationTest.runtimeClasspath
+  useJUnitPlatform()
 }
 
 tasks.named('test') {

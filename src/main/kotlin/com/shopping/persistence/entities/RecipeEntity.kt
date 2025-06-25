@@ -22,7 +22,7 @@ class RecipeEntity(
   @Column(nullable = false)
   var name: String,
 
-  @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL], orphanRemoval = true)
+  @OneToMany(fetch = FetchType.EAGER, cascade = [CascadeType.ALL], orphanRemoval = true)
   @JoinColumn(name = "recipeId", referencedColumnName = "id")
   @Fetch(FetchMode.SUBSELECT)
   var items: MutableList<RecipeItemEntity> = mutableListOf(),

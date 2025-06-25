@@ -19,12 +19,12 @@ class CartEntity(
   @Column(nullable = false)
   var id: UUID = UUID.randomUUID(),
 
-  @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL], orphanRemoval = true)
+  @OneToMany(fetch = FetchType.EAGER, cascade = [CascadeType.ALL], orphanRemoval = true)
   @JoinColumn(name = "cartId", referencedColumnName = "id")
   @Fetch(FetchMode.SUBSELECT)
   var products: MutableList<CartProductEntity> = mutableListOf(),
 
-  @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL], orphanRemoval = true)
+  @OneToMany(fetch = FetchType.EAGER, cascade = [CascadeType.ALL], orphanRemoval = true)
   @JoinColumn(name = "cartId", referencedColumnName = "id")
   @Fetch(FetchMode.SUBSELECT)
   var recipes: MutableList<CartRecipeEntity> = mutableListOf(),
